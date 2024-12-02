@@ -5,189 +5,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charity Stand-Up Event</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            color: #333;
-        }
-
-        header {
-            text-align: center;
-            padding: 30px 20px;
-            background: #ffffffdd;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-            color: #ff5e5e;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            margin: 10px 0 0;
-        }
-
-        .artist-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
-            justify-content: center;
-            gap: 20px;
-            padding: 40px;
-        }
-
-        .artist-card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .artist-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .artist-image {
-            height: 200px;
-            object-fit: cover;
-            display: block;
-            width: 100%;
-        }
-
-        .artist-content {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .artist-content h2 {
-            margin: 0;
-            font-size: 1.8rem;
-            color: #333;
-        }
-
-        .artist-content p {
-            margin: 10px 0;
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .donate-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 20px;
-            background-color: #ff5e5e;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-        }
-
-        .donate-link:hover {
-            background-color: #e04c4c;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #ffffffdd;
-            backdrop-filter: blur(5px);
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .artist-container {
-                grid-template-columns: repeat(2, 1fr); /* Two cards per row */
-                justify-content: center; /* Centers the grid content */
-                gap: 10px; /* Adjust spacing for smaller screens */
-            }
-
-            .artist-card {
-                margin: 0 auto; /* Ensures cards stay centered if fewer than two fit */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <header>
         <h1>XStand-Up Event</h1>
-        <p>Supporte tes comédiens favoris !</p>
+        <p>Supporte tes comédiens favoris ! L'ensemble des dons de la soirée sera reversé aux Petits Princes.</p>
     </header>
+
+    <div class="global-pot-card">
+        <h2>Participez à la cagnotte globale</h2>
+        <p>Contribuez directement pour l'association Petits Princes !</p>
+        <a class="donate-link global-donate-link" href="https://lydia-app.com/pots/global-pot-id" target="_blank">Donner Maintenant</a>
+    </div>
 
     <main class="artist-container">
         <!-- Repeat for each artist -->
         <div class="artist-card">
             <img class="artist-image" src="images\doucine.jpg">
             <div class="artist-content">
-                <h2>Axel Doucine</h2>
+                <h2>Axel, APT</h2>
                 <p>Vive la biodiversité !</p>
-                <a class="donate-link" href="https://lydia-app.com/pots?id=37117-elian" target="_blank">Faire un don</a>
+                <a class="donate-link" href="https://lydia-app.com/pots?id=37117-elian" target="_blank">Supporter</a>
             </div>
         </div>
 
         <div class="artist-card">
             <img class="artist-image" src="images\jeanneau.jpg">
             <div class="artist-content">
-                <h2>Gauthier Jeanneau</h2>
+                <h2>Gauthier, X</h2>
                 <p>Les Hommes, c'est comme les bras : plus c'est petit, plus c'est moignon</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Faire un don</a>
+                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
             </div>
         </div>
 
         <div class="artist-card">
             <img class="artist-image" src="images\veyron.jpg">
             <div class="artist-content">
-                <h2>Éloi Veyron</h2>
+                <h2>Éloi, ENSAE</h2>
                 <p>From jouer à l'Olympia to jouer à Olympiades</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Faire un don</a>
+                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
             </div>
         </div>
 
         <div class="artist-card">
             <img class="artist-image" src="">
             <div class="artist-content">
-                <h2>Prénom Nom</h2>
+                <h2>Prénom, Ecole</h2>
                 <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Faire un don</a>
+                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
             </div>
         </div>
 
         <div class="artist-card">
             <img class="artist-image" src="">
             <div class="artist-content">
-                <h2>Prénom Nom</h2>
+                <h2>Prénom, Ecole</h2>
                 <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Faire un don</a>
+                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
             </div>
         </div>
 
         <div class="artist-card">
             <img class="artist-image" src="">
             <div class="artist-content">
-                <h2>Prénom Nom</h2>
+                <h2>Prénom, Ecole</h2>
                 <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Faire un don</a>
+                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
             </div>
         </div>
 
         <div class="artist-card">
             <img class="artist-image" src="">
             <div class="artist-content">
-                <h2>Prénom Nom</h2>
+                <h2>Prénom, Ecole</h2>
                 <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Faire un don</a>
+                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
             </div>
         </div>
     </main>
