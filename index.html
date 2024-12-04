@@ -1,94 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Stand-Up Event</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Lydia Fund Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #fund-container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #fund-amount {
+            font-size: 3em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        #last-updated {
+            color: #7f8c8d;
+            font-size: 0.8em;
+        }
+    </style>
 </head>
-
 <body>
-    <header>
-        <h1>XStand-Up Event</h1>
-        <p>Supporte tes comédiens favoris ! L'ensemble des dons de la soirée sera reversé aux Petits Princes.</p>
-    </header>
-
-    <div class="global-pot-card">
-        <h2>Participez à la cagnotte globale</h2>
-        <p>Contribuez directement pour l'association Petits Princes !</p>
-        <a class="donate-link global-donate-link" href="https://lydia-app.com/pots/global-pot-id" target="_blank">Donner Maintenant</a>
+    <div id="fund-container">
+        <div id="fund-amount">Loading...</div>
+        <div id="last-updated"></div>
     </div>
 
-    <main class="artist-container">
-        <!-- Repeat for each artist -->
-        <div class="artist-card">
-            <img class="artist-image" src="images\doucine.jpg">
-            <div class="artist-content">
-                <h2>Axel, APT</h2>
-                <p>Vive la biodiversité !</p>
-                <a class="donate-link" href="https://lydia-app.com/pots?id=37117-elian" target="_blank">Supporter</a>
-            </div>
-        </div>
+    <script>
+        async function fetchLydiaFundAmount() {
+            try {
+                // Using a CORS proxy to bypass cross-origin restrictions
+                const proxyUrl = 'https://api.allorigins.win/get?url=';
+                const targetUrl = 'https://lydia-app.com/collect/91669-cagnotte-generale/fr';
+                
+                const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+                const data = await response.json();
+                const html = data.contents;
+                
+                // Create a temporary div to parse HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Find the div with the fund amount
+                const amountDiv = tempDiv.querySelector('div.collected-amount-label');
+                
+                if (amountDiv) {
+                    const amount = amountDiv.textContent.trim();
+                    document.getElementById('fund-amount').textContent = amount;
+                    document.getElementById('last-updated').textContent = `Last updated: ${new Date().toLocaleString()}`;
+                } else {
+                    throw new Error('Amount not found');
+                }
+            } catch (error) {
+                document.getElementById('fund-amount').textContent = 'Error fetching amount';
+                console.error('Fetch error:', error);
+            }
+        }
 
-        <div class="artist-card">
-            <img class="artist-image" src="images\jeanneau.jpg">
-            <div class="artist-content">
-                <h2>Gauthier, X</h2>
-                <p>Les Hommes, c'est comme les bras : plus c'est petit, plus c'est moignon</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
-            </div>
-        </div>
-
-        <div class="artist-card">
-            <img class="artist-image" src="images\veyron.jpg">
-            <div class="artist-content">
-                <h2>Éloi, ENSAE</h2>
-                <p>From jouer à l'Olympia to jouer à Olympiades</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
-            </div>
-        </div>
-
-        <div class="artist-card">
-            <img class="artist-image" src="">
-            <div class="artist-content">
-                <h2>Prénom, Ecole</h2>
-                <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
-            </div>
-        </div>
-
-        <div class="artist-card">
-            <img class="artist-image" src="">
-            <div class="artist-content">
-                <h2>Prénom, Ecole</h2>
-                <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
-            </div>
-        </div>
-
-        <div class="artist-card">
-            <img class="artist-image" src="">
-            <div class="artist-content">
-                <h2>Prénom, Ecole</h2>
-                <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
-            </div>
-        </div>
-
-        <div class="artist-card">
-            <img class="artist-image" src="">
-            <div class="artist-content">
-                <h2>Prénom, Ecole</h2>
-                <p>Phrase</p>
-                <a class="donate-link" href="https://lydia-app.com/pot/pot456" target="_blank">Supporter</a>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        &copy; 2024 X Stand-Up Event. All rights reserved.
-    </footer>
+        // Fetch immediately and then every 5 seconds
+        fetchLydiaFundAmount();
+        setInterval(fetchLydiaFundAmount, 5000);
+    </script>
 </body>
-
 </html>
