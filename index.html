@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lydia Fund Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #fund-container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #fund-amount {
+            font-size: 3em;
+            color: #2c3e50;
+        }
+        #last-updated {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div id="fund-container">
+        <div id="fund-amount">Loading...</div>
+        <div id="last-updated">Last updated: N/A</div>
+    </div>
+
+    <script>
+        async function fetchLydiaFundAmount() {
+            try {
+                const proxyUrl = 'https://api.allorigins.win/get?url=';
+                const targetUrl = encodeURIComponent(`https://lydia-app.com/collect/91669-cagnotte-generale/fr?nocache=${Date.now()}`);
+                
+                const response = await fetch(`${proxyUrl}${targetUrl}`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const html = data.contents;
+                
+                // Create a temporary div to parse HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Find the div with the fund amount
+                const amountDiv = tempDiv.querySelector('div.collected-amount-label');
+                
+                if (amountDiv) {
+                    const amount = amountDiv.textContent.trim();
+                    document.getElementById('fund-amount').textContent = amount;
+                    document.getElementById('last-updated').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
+                } else {
+                    throw new Error('Amount not found');
+                }
+            } catch (error) {
+                document.getElementById('fund-amount').textContent = 'Error fetching amount';
+                console.error('Fetch error:', error);
+            }
+        }
+
+        // Fetch immediately and then every 5 seconds (lower interval for quicker updates)
+        fetchLydiaFundAmount();
+        setInterval(fetchLydiaFundAmount, 10000);
+    </script>
+</body>
+</html>
