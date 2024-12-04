@@ -23,18 +23,12 @@
         #fund-amount {
             font-size: 3em;
             color: #2c3e50;
-            margin-bottom: 20px;
-        }
-        #last-updated {
-            color: #7f8c8d;
-            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
     <div id="fund-container">
         <div id="fund-amount">Loading...</div>
-        <div id="last-updated"></div>
     </div>
 
     <script>
@@ -58,7 +52,6 @@
                 if (amountDiv) {
                     const amount = amountDiv.textContent.trim();
                     document.getElementById('fund-amount').textContent = amount;
-                    document.getElementById('last-updated').textContent = `Last updated: ${new Date().toLocaleString()}`;
                 } else {
                     throw new Error('Amount not found');
                 }
